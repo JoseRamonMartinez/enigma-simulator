@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+#Maquina Enigma by Jose Ramon Martínez
 
-def rotor(letra, numero, inverso=False):
+def rotor(letra, numero, reverse=False):
 
    I = [4, 10, 12, 5, 11, 6, 3, 16, 21, 25, 13, 19, 14, 22, 24, 7, 23, 20, 18, 15, 0, 8, 1, 17, 2, 9]
    II = [0, 9, 3, 10, 18, 8, 17, 20, 23, 1, 11, 7, 22, 19, 12, 2, 16, 6, 25, 13, 15, 24, 5, 21, 14, 4]
@@ -11,53 +12,61 @@ def rotor(letra, numero, inverso=False):
 
    tipo = [I, II, III]
 
-   if inverso == False:
+   if reverse == False:
        return tipo[numero - 1][(letra) % 26]
    else:
-       return tipo[numero - 1].index((letra) % 26)
+       return tipo[numero - 1].index((letra) % 26) #con index pasamos la posicion
 
+    #list(range) genera una lista del estilo cambios='0','1','2'...
+def enigma(input, numerosnumerosrotores, posicionesclavijas, stickers=list(range(26))):
 
-# Aquí empieza lo bueno
-def enigma(texto, numeros, posiciones, cambios=list(range(26))):
-   girador = [16, 4, 21, 9,25]
-   lista = list(texto)  # Convertimos el texto en una lista de caracteres.
+   #como Q=16, E=4, V=21, J=9, Z=25
+   girorotor = [16, 4, 21, 9,25]
+
+   #TRANSFORMACION DE la CADENA INPUT
+   lista = list(input)  # Convertimos el input que es texto en una lista de caracteres. En plan, Hola como 'H','o','l','a'
 
    listacif = []  # Inicializamos la lista de letras cifradas
 
-   letras = [ord(letra) - 65 for letra in lista]
+    #traducimos lo que nos pasa como parametro que ya hemos transformado en una lista y lo transformamos en numeros, 
+    #con ord hay que restarle 65 porq A=65, B=66
+   for letra in lista
 
+    letras = [ord(letra) - 65 ]
+   
+   #Vamos a la traduccion de cada letra de input
    for letra in letras:
+       #comprobamos que no este cambiado los stickers
+       letra = stickers[letra]
 
-       letra = cambios[letra]
+       posicionesclavijas[2] = (posicionesclavijas[2] + 1) % 26
 
-       posiciones[2] = (posiciones[2] + 1) % 26
+       if posicionesclavijas[2] == girorotor[numerosrotores[2] - 1] + 1:  #el del medio
+           posicionesclavijas[1] = (posicionesclavijas[1] + 1) % 26
 
-       if posiciones[2] == girador[numeros[2] - 1] + 1:  #el de enmedio
-           posiciones[1] = (posiciones[1] + 1) % 26
-
-       if posiciones[1] == girador[numeros[1] - 1]:  #el de la derecha
-           posiciones[0] = (posiciones[0] + 1) % 26
-           posiciones[
-               1] += 1  #El rotor de enmedio puede girar dos veces seguidas. Esta sutileza, que se aprecia claramente en el modelo gráfico recomendado, me dio algún dolor de cabeza.
+       if posicionesclavijas[1] == girorotor[numerosnumerosrotores[1] - 1]:  #el de la izquierda
+           posicionesclavijas[0] = (posicionesclavijas[0] + 1) % 26
+           posicionesclavijas[
+               1] += 1  #El doble paso
 
 
-       rotor1 = rotor((letra + posiciones[2]) % 26, numeros[
+       rotor1 = rotor((letra + posicionesclavijas[2]) % 26, numerosnumerosrotores[
            2])
 
-       rotor2 = rotor((rotor1 - (posiciones[2] - posiciones[1])) % 26, numeros[1])
+       rotor2 = rotor((rotor1 - (posicionesclavijas[2] - posicionesclavijas[1])) % 26, numerosrotores[1])
 
-       rotor3 = rotor(rotor2 - (posiciones[1] - posiciones[0]) % 26, numeros[0])
+       rotor3 = rotor(rotor2 - (posicionesclavijas[1] - posicionesclavijas[0]) % 26, numerosrotores[0])
 
        # Ahora vamos con la reflexión.
        R = [24, 17, 20, 7, 16, 18, 11, 3, 15, 23, 13, 6, 14, 10, 12, 8, 4, 1, 5, 25, 2, 22, 21, 9, 0, 19]
 
-       reflejado = R[rotor3 - posiciones[0]]
+       reflejado = R[rotor3 - posicionesclavijas[0]]
 
-       rotor3 = rotor(reflejado + posiciones[0], numeros[0], True)
+       rotor3 = rotor(reflejado + posicionesclavijas[0], numerosrotores[0], True)
 
-       rotor2 = rotor(rotor3 + (posiciones[1] - posiciones[0]) % 26, numeros[1], True)
+       rotor2 = rotor(rotor3 + (posicionesclavijas[1] - posicionesclavijas[0]) % 26, numerosrotores[1], True)
 
-       rotor1 = (rotor(rotor2 + (posiciones[2] - posiciones[1]) % 26, numeros[2], True) - posiciones[2]) % 26
+       rotor1 = (rotor(rotor2 + (posicionesclavijas[2] - posicionesclavijas[1]) % 26, numerosrotores[2], True) - posiciones[2]) % 26
 
 
        #el intercambiador letra = cambios[rotor1]
@@ -74,7 +83,7 @@ def enigma(texto, numeros, posiciones, cambios=list(range(26))):
    return listafin
 
 
-
+#Pasamos lo que queremos traducir, la posicion de los rotores, la posicion de las clavijas y los stickers
 print(
    enigma('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
           [1, 2, 3], [0, 0, 25],
