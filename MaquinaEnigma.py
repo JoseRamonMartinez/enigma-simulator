@@ -98,14 +98,38 @@ print(
            [4, 5, 1], [7, 3, 23],
            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]))
 
+print('\n Parte 2 \n\n\n\n')
 
 
+def fuerzaBruta():
+    diccionario = ['AMBIGUO', 'OBVIO', 'TRIVIAL', 'ESTUPENDO', 'ESTHER', 'BUGZILLA', 'LUGAR', 'PACIFICO', 'DIARREA',
+                   'HOLA', 'MUNDO', 'CALABAZA', 'CELULA', 'PORRO', 'SUAVES', 'ALBACETE', 'FIESTA', 'PATATA']
 
+    for x in range(25):
+        for y in range(25):
+            print(x, y)
+            for z in range(25):
+                l = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+                cambios = []
+                for i in range(0, len(l) - 1):
+                    for j in range(i + 1, len(l)):
+                        uno = l[:]
+                        aux = uno[i]
+                        uno[i] = uno[j]
+                        uno[j] = aux
+                        cambios.append(uno)
+                        # t = enigma('KHIVQBTCYRFAFWPLVSCAMMRFVDMSIIRRTRZTLAOMWHFQDTOFARWZYVPWPZBNKWAV', [1, 2, 3],[x, y, z], uno)
+                        # t= enigma('KHIVQBTCYRFAFWPLVSCAMMRFVDMSIIRRTRZTLAOMWHFQDTOFARWZYVPWPZBNKWAV',[1, 2, 3], [x, y, z], uno)
+                        t = enigma('AJKZ', [1, 2, 3], [x, y, z], uno)
+                        if (t in diccionario):
+                            print(t)
+                            print('\n')
 
 
 def fuerzaBruta():
     for x in range(25):
         for y in range(25):
+            print(x, y)
             for z in range(25):
 
                 l = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
@@ -118,80 +142,81 @@ def fuerzaBruta():
                         uno[i] = uno[j]
                         uno[j] = aux
                         cambios.append(uno)
+                        t = enigma('AVVGTHJZTBUHXQYYN', [1, 2, 3],
+                                   [x, y, z], uno)
+                #t= enigma('KHIVQBTCYRFAFWPLVSCAMMRFVDMSIIRRTRZTLAOMWHFQDTOFARWZYVPWPZBNKWAV',[1, 2, 3], [x, y, z], uno)
 
-                t= enigma('KHIVQBTCYRFAFWPLVSCAMMRFVDMSIIRRTRZTLAOMWHFQDTOFARWZYVPWPZBNKWAV',[1, 2, 3], [x, y, z], uno)
+                        if ('AMBIGUO' in t ):
+                            print (t)
+                            print('esta ambiguo')
 
-                if ('AMBIGUO' in t ):
-                    print (t)
-                    print('esta ambiguo')
+                        if ('OBVIO' in t ):
+                            print (t)
+                            print('esta OBVIO')
 
-                if ('OBVIO' in t ):
-                    print (t)
-                    print('esta OBVIO')
+                        if ('TRIVIAL' in t ):
+                            print (t)
+                            print('esta TRIVIAL')
 
-                if ('TRIVIAL' in t ):
-                    print (t)
-                    print('esta TRIVIAL')
+                        if ('ESTUPENDO' in t ):
+                            print (t)
+                            print('esta ESTUPENDO')
 
-                if ('ESTUPENDO' in t ):
-                    print (t)
-                    print('esta ESTUPENDO')
+                        if ('ESTHER' in t ):
+                            print (t)
+                            print('esta ESTHER')
 
-                if ('ESTHER' in t ):
-                    print (t)
-                    print('esta ESTHER')
+                        if ('BUGZILLA' in t ):
+                            print (t)
+                            print('esta BUGZILLA')
 
-                if ('BUGZILLA' in t ):
-                    print (t)
-                    print('esta BUGZILLA')
+                        if ('LUGAR' in t ):
+                            print (t)
+                            print('esta LUGAR')
 
-                if ('LUGAR' in t ):
-                    print (t)
-                    print('esta LUGAR')
+                        if ('PACIFICO' in t ):
+                            print (t)
+                            print('esta PACIFICO')
 
-                if ('PACIFICO' in t ):
-                    print (t)
-                    print('esta PACIFICO')
+                        if ('DIARREA' in t ):
+                            print (t)
+                            print('esta DIARREA')
 
-                if ('DIARREA' in t ):
-                    print (t)
-                    print('esta DIARREA')
+                        if ('HOLA' in t ):
+                            print (t)
+                            print('esta HOLA')
 
-                if ('HOLA' in t ):
-                    print (t)
-                    print('esta HOLA')
+                        if ('MUNDO' in t ):
+                            print (t)
+                            print('esta MUNDO')
 
-                if ('MUNDO' in t ):
-                    print (t)
-                    print('esta MUNDO')
+                        if ('CALABAZA' in t ):
+                            print (t)
+                            print('esta CALABAZA')
 
-                if ('CALABAZA' in t ):
-                    print (t)
-                    print('esta CALABAZA')
+                        if ('CELULA' in t):
+                            print(t)
+                            print('esta CELULA')
 
-                if ('CELULA' in t):
-                    print(t)
-                    print('esta CELULA')
+                        if ('PORRO' in t):
+                            print(t)
+                            print('esta PORRO')
 
-                if ('PORRO' in t):
-                    print(t)
-                    print('esta PORRO')
+                        if ('SUAVES' in t):
+                            print(t)
+                            print('esta SUAVES')
 
-                if ('SUAVES' in t):
-                    print(t)
-                    print('esta SUAVES')
+                        if ('ALBACETE' in t):
+                            print(t)
+                            print('esta ALBACETE')
 
-                if ('ALBACETE' in t):
-                    print(t)
-                    print('esta ALBACETE')
+                        if ('FIESTA' in t):
+                            print(t)
+                            print('esta FIESTA')
 
-                if ('FIESTA' in t):
-                    print(t)
-                    print('esta FIESTA')
-
-                if ('PATATA' in t):
-                    print(t)
-                    print('esta PATATA')
+                        if ('PATATA' in t):
+                            print(t)
+                            print('esta PATATA')
 
 
 fuerzaBruta()
@@ -200,18 +225,5 @@ fuerzaBruta()
 
 
 
-
-def fuerzaIntercambiar():
-    l = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
-    cambios = []
-
-    for i in range(0, len(l)-1):
-        for j in range(i+1, len(l)):
-            uno = l[:]
-            aux 	= uno[i]
-            uno[i] 	= uno[j]
-            uno[j]	= aux
-            cambios.append(uno)
-            print (uno)
 
 
