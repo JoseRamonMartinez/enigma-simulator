@@ -107,6 +107,7 @@ def fuerzaBruta():
                    'HOLA', 'MUNDO', 'CALABAZA', 'CELULA', 'PORRO', 'SUAVES', 'ALBACETE', 'FIESTA', 'PATATA']   
     for x in range(25):
         for y in range(25):
+            print (x,y)
             for z in range(25):
                 l = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]               
                 cambios = []
@@ -117,13 +118,11 @@ def fuerzaBruta():
                         uno[i] = uno[j]
                         uno[j] = aux
                         cambios.append(uno)
-                        #t = enigma('KHIVQBTCYRFAFWPLVSCAMMRFVDMSIIRRTRZTLAOMWHFQDTOFARWZYVPWPZBNKWAV', [1, 2, 3],[x, y, z], uno)
-                        t = enigma('TXNH', [1, 2, 3],[x, y, z], uno)
-                        if (t == 'JOSE'):#diccionario):
-                            print 
-                            print('*** FRASE: ',t,'\nPositivo -> Clavijas: ',x,' ',y,' ',z , 'Steckers: ',uno) 
-                            
-                            print('\n')
+                        t = enigma('KHIVQBTCYRFAFWPLVSCAMMRFVDMSIIRRTRZTLAOMWHFQDTOFARWZYVPWPZBNKWAV', [1, 2, 3],[x, y, z], uno)
+                        for d in diccionario:
+                            if ( d in t ):
+                                print('*** FRASE: ',t,'\nPositivo -> Clavijas: ',x,' ',y,' ',z , 'Steckers: ',uno)
+                                print('\n')
     input()
 
 fuerzaBruta()
